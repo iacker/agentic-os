@@ -1,10 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
-  # Ajouter ~/.local/bin au PATH pour tous les users
-  environment.sessionVariables = {
-    PATH = "$HOME/.local/bin:$PATH";
-    ANTHROPIC_API_KEY = ""; # On le set manuellement pour la sécurité
-  };
+  # Ajouter ~/.local/bin au PATH via bashrc
+  programs.bash.interactiveShellInit = ''
+    export PATH="$HOME/.local/bin:$PATH"
+  '';
 
   # Script d'installation de cagent au démarrage
   system.activationScripts.cagent = ''
