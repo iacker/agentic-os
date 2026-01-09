@@ -20,7 +20,7 @@
   <a href="#why">Why</a> |
   <a href="#features">Features</a> |
   <a href="#quick-start">Quick Start</a> |
-  <a href="#ai-tools">AI Tools</a> |
+  <a href="#whats-included">What's Included</a> |
   <a href="#architecture">Architecture</a>
 </p>
 
@@ -46,9 +46,9 @@ sudo nixos-rebuild switch --flake .#wsl
 ## Features
 
 ### AI-Native OS
-- 5 AI coding agents built into the system (Claude, Gemini, Codex, OpenCode, cagent)
+- 5 AI coding agents built into the system
 - Controlled updates via `nix flake update llm-agents`
-- Custom derivations for tools not in nixpkgs
+- Custom derivations for tools not in nixpkgs (e.g., Docker cagent)
 
 ### Reproducibility and Safety
 - Same config = same environment, guaranteed
@@ -92,22 +92,63 @@ which claude gemini codex opencode cagent
 
 ---
 
-## AI Tools
+## What's Included
+
+### AI Coding Agents
 
 | Command | Provider | Source |
 |---------|----------|--------|
 | `claude` | Anthropic | llm-agents flake |
 | `gemini` | Google | llm-agents flake |
-| `codex` | OpenAI | nixpkgs |
 | `opencode` | SST | llm-agents flake |
+| `codex` | OpenAI | nixpkgs |
 | `cagent` | Docker | custom derivation |
 
-Update all AI tools:
+### CLI Tools
 
-```bash
-nix flake update llm-agents
-sudo nixos-rebuild switch --flake .#wsl
-```
+| Category | Tools |
+|----------|-------|
+| Navigation | fzf, ripgrep, fd, lsd, bat |
+| Data | jq, yq |
+| Network | curl, wget, htop |
+| Git | git, gh, lazygit |
+| Dev | python312, nodejs_22 |
+
+### Neovim + LazyVim
+
+Pre-configured with LSP servers and formatters:
+
+| LSP Servers | Languages |
+|-------------|-----------|
+| nil | Nix |
+| lua-language-server | Lua |
+| typescript-language-server | TypeScript/JavaScript |
+| bash-language-server | Bash |
+| yaml-language-server | YAML |
+| pyright | Python |
+| gopls | Go |
+| rust-analyzer | Rust |
+| terraform-ls | Terraform |
+| marksman | Markdown |
+
+| Formatters/Linters | |
+|--------------------|--|
+| stylua | Lua |
+| shellcheck, shfmt | Shell |
+| black | Python |
+| alejandra | Nix |
+
+LazyVim starter auto-installs on first rebuild.
+
+### Docker
+
+- Native daemon (no Docker Desktop)
+- Auto-prune enabled
+- Starts on boot
+
+### VS Code Remote
+
+nix-ld configured with common libraries for seamless VS Code Remote-WSL support.
 
 ---
 
@@ -119,7 +160,7 @@ flake.nix                 # Entry point + inputs
 └── modules/
     ├── ai-cli.nix        # AI agents as system packages
     ├── docker.nix        # Docker daemon with auto-prune
-    ├── lazyvim.nix       # Neovim + 10 LSP servers
+    ├── lazyvim.nix       # Neovim + 10 LSP servers + formatters
     ├── tools.nix         # CLI tools (git, fzf, ripgrep...)
     └── vscode.nix        # nix-ld for VS Code Remote
 ```
@@ -144,6 +185,9 @@ sudo nixos-rebuild switch --rollback
 
 # List all generations
 sudo nix-env -p /nix/var/nix/profiles/system --list-generations
+
+# Test a package without installing
+nix-shell -p <package>
 ```
 
 ---
@@ -158,10 +202,34 @@ It defines project structure, essential commands, and conventions so Claude Code
 
 ---
 
+## Customization
+
+### Add a package
+
+```bash
+# Edit the relevant module
+nvim modules/tools.nix
+
+# Add your package to environment.systemPackages
+
+# Apply
+git add .
+sudo nixos-rebuild switch --flake .#wsl
+```
+
+### Add a new module
+
+1. Create `modules/mymodule.nix`
+2. Import it in `hosts/wsl.nix`
+3. Rebuild
+
+---
+
 ## Resources
 
 - [NixOS-WSL](https://github.com/nix-community/NixOS-WSL)
 - [llm-agents.nix](https://github.com/numtide/llm-agents.nix)
+- [LazyVim](https://www.lazyvim.org/)
 - [NixOS Manual](https://nixos.org/manual/nixos/stable/)
 
 ---
