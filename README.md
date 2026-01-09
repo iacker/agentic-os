@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="logo.png" alt="Agentic OS" width="200">
+<img src="logo.png" alt="Agentic OS" width="400">
 </p>
 
-<h1 align="center">agentic-os</h1>
+<h1 align="center">Agentic OS</h1>
 
 <p align="center">
   <strong>An opinionated NixOS-WSL setup where AI tools are system packages, not ad-hoc installs.</strong>
