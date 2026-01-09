@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="NIXOSWSL.png" alt="Agentic OS" width="200">
+  <img src="logo.png" alt="Agentic OS" width="200">
 </p>
 
 <h1 align="center">agentic-os</h1>
@@ -12,7 +12,7 @@
   <a href="https://nixos.org"><img src="https://img.shields.io/badge/NixOS-25.05-5277C3?logo=nixos&logoColor=white" alt="NixOS"></a>
   <a href="https://github.com/nix-community/NixOS-WSL"><img src="https://img.shields.io/badge/WSL2-NixOS--WSL-0078D6?logo=windows&logoColor=white" alt="WSL2"></a>
   <a href="https://www.docker.com"><img src="https://img.shields.io/badge/Docker-Native-2496ED?logo=docker&logoColor=white" alt="Docker"></a>
-  <a href="#ai-tools"><img src="https://img.shields.io/badge/AI%20Agents-5%20Built--in-FF6F00?logo=openai&logoColor=white" alt="AI Agents"></a>
+  <a href="#ai-coding-agents"><img src="https://img.shields.io/badge/AI%20Agents-5%20Built--in-FF6F00?logo=openai&logoColor=white" alt="AI Agents"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
 </p>
 
@@ -34,6 +34,8 @@ Your dev environment shouldn't break. Your AI tools shouldn't be scattered acros
 npm install, pip install, curl | bash  -->  replaced by one flake.
 ```
 
+Because environments drift. And drift kills focus.
+
 **agentic-os** treats AI coding assistants as **first-class system dependencies** — declarative, reproducible, and update-controlled.
 
 ```bash
@@ -44,6 +46,8 @@ sudo nixos-rebuild switch --flake .#wsl
 ---
 
 ## Features
+
+**agentic-os is not a dotfiles repo. It's an operating system profile.**
 
 ### AI-Native OS
 - 5 AI coding agents built into the system
@@ -203,6 +207,8 @@ It defines project structure, essential commands, and conventions so Claude Code
 ---
 
 ## Customization
+
+Everything is modular by design. You never touch the base system.
 
 ### Add a package
 
