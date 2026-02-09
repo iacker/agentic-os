@@ -26,5 +26,10 @@
     python312
     python312Packages.pip
     nodejs_22
+
+    # Kubernetes / Talos
+    talosctl
+    kubectl
+    kubernetes-helm
   ];
 }

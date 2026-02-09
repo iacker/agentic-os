@@ -10,6 +10,7 @@
     ../modules/ai-cli.nix
     ../modules/lazyvim.nix
     ../modules/vscode.nix
+    ../modules/sops.nix
   ];
 
   # WSL Configuration

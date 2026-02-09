@@ -11,6 +11,12 @@
 
     # AI CLI tools - DO NOT follow nixpkgs (compatibility issue)
     llm-agents.url = "github:numtide/llm-agents.nix";
+
+    # Secrets management
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -18,6 +24,7 @@
     nixpkgs,
     nixos-wsl,
     llm-agents,
+    sops-nix,
     ...
   }: {
     nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
@@ -25,6 +32,7 @@
       specialArgs = {inherit llm-agents;};
       modules = [
         nixos-wsl.nixosModules.wsl
+        sops-nix.nixosModules.sops
         ./hosts/wsl.nix
       ];
     };
